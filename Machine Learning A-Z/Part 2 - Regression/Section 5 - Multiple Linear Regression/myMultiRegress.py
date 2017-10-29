@@ -34,13 +34,23 @@ y_prediction = regressor.predict(X_test)
 
 
 ################################################
-#building optimal model using Backward Elimination with sig level = .05
+#building optimal model using Backward Elimination with sig level = .05S
 import statsmodels.formula.api as sm
+
 #add column of b_0(1's) to X
 X = np.append(arr =  np.ones((50,1)).astype(int), values = X, axis = 1)
+
+##repeat this block of code for every P < sig level starting from all dependant variables
 X_optimal = X[:,[0,1,2,3,4,5]]
 regressor_OLS = sm.OLS(endog = Y, exog = X_optimal ).fit()
-regressor_OLS.summary()
 X_optimal = X[:,[0,1,3,4,5]]
 regressor_OLS = sm.OLS(endog = Y, exog = X_optimal ).fit()
+X_optimal = X[:,[0,3,4,5]]
+regressor_OLS = sm.OLS(endog = Y, exog = X_optimal ).fit()
+X_optimal = X[:,[0,3,5]]
+regressor_OLS = sm.OLS(endog = Y, exog = X_optimal ).fit()
+X_optimal = X[:,[0,3]]
+regressor_OLS = sm.OLS(endog = Y, exog = X_optimal ).fit()
+
+##copy paste this line to test
 regressor_OLS.summary()
